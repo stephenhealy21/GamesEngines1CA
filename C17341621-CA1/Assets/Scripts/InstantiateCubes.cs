@@ -64,19 +64,7 @@ public class InstantiateCubes : MonoBehaviour
                 tempVector = _sampleCube[i].transform.localScale;
                 tempVector.z = (AudioVisualiser._samples[i % sampleSize] * _maxScale + 2);
                _sampleCube[i].transform.localScale = tempVector;
-                //r = ((colourCounter * 2f) % 255) / 100f; //((float)System.Math.Pow(colourCounter, 1.1) % (float)255) / 100;
-                //g = ((colourCounter * 3f) % 255) / 100f;//((float)System.Math.Pow(colourCounter, 1.2) % (float)255) / 100;
-                //b = ((colourCounter * 4f) % 255) / 100f;//((float)System.Math.Pow(colourCounter, 1.3) % (float)255) / 100;
-
-                //r = ((float)System.Math.Pow(1.1,colourCounter) % (float)255) / 100;
-                //g = ((float)System.Math.Pow(1.2,colourCounter) % (float)255) / 100;
-                //b = ((float)System.Math.Pow(1.3,colourCounter) % (float)255) / 100;
-
-                //r = ((float)((37 * 2) % 100)) / 100f;
-                //g = ((float)((colourCounter * 3) % 100)) / 100f;
-                //b = ((float)((colourCounter * 2) % 100)) / 100f;
-
-                //Debug.Log("colourCounter: " +colourCounter+"R: "+r+" G: " +g +" B: " +b);
+               
                 
                 string hexString = "#" +hexColour.ToString("X");
                 Debug.Log("Hex:"+ hexString);
@@ -86,10 +74,7 @@ public class InstantiateCubes : MonoBehaviour
                     Debug.Log("heerio");
                 }
 
-                //SetColor("_Color",new Color(r,g,b));
-               ////_sampleCube[i].transform.Rotate(transform.up * rotateSpeed * Time.deltaTime);
-                //_sampleCube[i].transform.RotateAround(Vector3.zero,Vector3.up,rotateSpeed * Time.deltaTime);
-                // _sampleCube[i].transform.LookAt(_cylinder.transform);
+                
                 Debug.Log(hexColour);
             }
             if(colourUp)
