@@ -7,16 +7,27 @@ public class InstantiateCubes : MonoBehaviour
     public GameObject _sampleCubePrefab;
     public GameObject _cylinder;
 
-    public float rotateSpeed = 30.0f;
+    public float rotateSpeed = 300.0f;
     GameObject[] _sampleCube = new GameObject[512];
     public float _maxScale = 1500;
     // Start is called before the first frame update
 
     int sampleSize = 72;
     int numPillars = 360;
+    static int colourShiftMult = 6;
+    float colourShift = 0.00277777777f * colourShiftMult;
 
     int hexColour = 0x000001;
     Color colour;
+
+        int redInt = 0;
+        int greenInt = 255;
+        int blueInt = 0;
+        
+        
+        float red;
+        float green;
+        float blue;
 
     void Start()
     {
@@ -39,6 +50,64 @@ public class InstantiateCubes : MonoBehaviour
             //tempVector.x = (sampleSize/360);
             _sampleCube[i].transform.localScale = tempVector;
             _sampleCube[i].transform.LookAt(_cylinder.transform);
+
+            red = (float)redInt * (1f / 255);
+            green = (float)blueInt * (1f / 255);
+            blue = (float)greenInt * (1f / 255);
+
+            //string hexString = "#" +hexColour.ToString("X");
+            //Debug.Log("Hex:"+ hexString);
+            /*if(ColorUtility.TryParseHtmlString(hexString, out colour))
+            {
+                _sampleCube[i].transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color",new Color(r:red,g:green,b:blue,a:0.3f));
+                Debug.Log("heerio");
+            }*/
+
+            colour = new Color(r:red,g:green,b:blue);
+            Debug.Log(colour);
+            _sampleCube[i].transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color",colour);
+            //green += colourShift;
+
+            int mod3 = i % 3;
+            
+            if(i < numPillars /2)
+            {
+                hexColour+=10;
+                
+                
+                //b += colourShift;
+                if(mod3 == 0)
+                {
+                    redInt += colourShiftMult;
+                }
+                else if(mod3 == 1)
+                {
+                    greenInt -= colourShiftMult;
+                }
+                else if(mod3 == 2)
+                {
+                    blueInt += colourShiftMult;
+                }
+
+
+            }
+            else
+            {
+                if(mod3 == 0)
+                {
+                    redInt -= colourShiftMult;
+                }
+                else if(mod3 == 1)
+                {
+                    greenInt += colourShiftMult;
+                }
+                else if(mod3 == 2)
+                {
+                    blueInt -= colourShiftMult;
+                }
+            }
+            //Debug.Log(r+" "+g+" "+b);
+
             
         }
     }
@@ -46,9 +115,7 @@ public class InstantiateCubes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float r;
-        float g;
-        float b;
+        
 
         
 
@@ -67,16 +134,13 @@ public class InstantiateCubes : MonoBehaviour
                
                 
                 string hexString = "#" +hexColour.ToString("X");
-                Debug.Log("Hex:"+ hexString);
-                if(ColorUtility.TryParseHtmlString(hexString, out colour))
-                {
-                    _sampleCube[i].transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color",colour);
-                    Debug.Log("heerio");
-                }
+                //Debug.Log("Hex:"+ hexString);
+             
 
                 
-                Debug.Log(hexColour);
+               // Debug.Log(hexColour);
             }
+            /*
             if(colourUp)
             {
                 hexColour+=  1;
@@ -92,6 +156,7 @@ public class InstantiateCubes : MonoBehaviour
                 colourUp = !(colourUp);
                 Debug.Log("pog");
             }
+            */
         }
         //_sampleCubePrefab.transform.Rotate(yAngle:.01f,xAngle:0,zAngle:0,relativeTo:Space.Self);
         
